@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/htt
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FileService } from '../service/file.service';
-import { fileSaver } from 'file-saver';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
 
   filenames: String[] = [];
-  fileStatus= {status : "",requestType:"",percent :0};
+  fileStatus = { status: "", requestType: "", percent: 0 };
 
   constructor(private router: Router,
     private fileService: FileService) { }
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     this.fileService.upload(formData).subscribe(
       (result) => {
         console.log(result);
-        this.reportProgress(result);
+        this.resportProgress(result);
       },
       (error: HttpErrorResponse) => {
         console.log(error);
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     this.fileService.download(filename).subscribe(
       (result) => {
         console.log(result);
-        this.reportProgress(result);
+        this.resportProgress(result);
       },
       (error: HttpErrorResponse) => {
         console.log(error);
@@ -58,34 +58,38 @@ export class HomeComponent implements OnInit {
 
   }
 
-  private reportProgress(httpEvent: HttpEvent<String[] | Blob>): void {
+
+  private resportProgress(httpEvent: HttpEvent<String[] | Blob>): void {
     switch (httpEvent.type) {
       case HttpEventType.UploadProgress:
-        this.updateStatus(httpEvent.loaded, httpEvent.total, 'Uploading');
+        this.updateStatus(httpEvent.loaded, httpEvent.total!, 'Uploading... ');
         break;
       case HttpEventType.DownloadProgress:
-        this.updateStatus(httpEvent.loaded, httpEvent.total, 'Downloading');
+        this.updateStatus(httpEvent.loaded, httpEvent.total!, 'Downloading... ');
         break;
       case HttpEventType.ResponseHeader:
         console.log('Header returned', httpEvent);
         break;
       case HttpEventType.Response:
         if (httpEvent.body instanceof Array) {
+          this.fileStatus.status = 'done';
           for (const filename of httpEvent.body) {
-            //unshoft is the similar of push but here we add the item on the beginning 
             this.filenames.unshift(filename);
           }
         } else {
-          //Download Logic  
-          //we will use file saver to save files on the client browser 
-          fileSaver(new File([httpEvent.body], httpEvent.headers.get('File-Name'),
+          console.log(httpEvent.headers.get('File-Name'));
+          saveAs(new File([httpEvent.body], httpEvent.headers.get('File-Name'),
             { type: `${httpEvent.headers.get('Content-Type')};charset=utf-8` }));
-
+          // saveAs(new Blob([httpEvent.body!], 
+          //   { type: `${httpEvent.headers.get('Content-Type')};charset=utf-8`}),
+          //    httpEvent.headers.get('File-Name'));
         }
+        this.fileStatus.status = 'done';
         break;
       default:
         console.log(httpEvent);
-          break;
+        break;
+
     }
   }
 
