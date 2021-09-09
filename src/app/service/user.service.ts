@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  apiUrl = 'http://localhost:8080';
+  apiUrl = 'https://uploader-backend-service.herokuapp.com';
 
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;

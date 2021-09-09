@@ -10,7 +10,7 @@ export class FileService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = 'http://localhost:8080';
+  apiUrl = 'https://uploader-backend-service.herokuapp.com';
 
   //Define function to upload files 
   upload(formData: FormData): Observable<HttpEvent<String[]>> {
