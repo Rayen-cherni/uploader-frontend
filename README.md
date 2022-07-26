@@ -1,27 +1,29 @@
-# Uploader
+## Project Summary
+Uploader is a module supports drag-n-drop upload, upload progress, validation filters and a file upload queue. It supports native HTML5 uploads, but degrades to a legacy iframe upload method for older browsers. Works with any server side platform which supports standard HTML form uploads. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.3.
 
-## Development server
+## Installation
+Want to Test? Great!
+Let's start by cloning the project in your machine
+Open your terminal and execute
+```sh
+git clone https://github.com/Rayen-cherni/uploader-frontend.git
+```
+Great, then run the following command line to run the project locally 
+```sh
+npm install
+ng serve --open
+```
+You will be redirected automatically to http://localhost:4600. <br/>
+If you have any problem with the redirection please go to your Browser and tap
+```sh
+http://localhost:4600
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Throughout the entire application
+Developers can find more information about this Application on my Github repository. I have written a series of two repositories on Spring Boot and Angular, here are the links:
+- [Front-end developed using Angular 10](https://github.com/Rayen-cherni/uploader-frontend.git)
+- [Back-end developed using Spring boot](https://github.com/Rayen-cherni/uploader-backend.git)
+## Further information
+To get more information on the Bazart project you can contact me on [LinkedIn](https://www.linkedin.com/in/rayen-cherni-181b97198/) or by Email rayen.cherni@eniso.u-sousse.tn.<br/>
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
